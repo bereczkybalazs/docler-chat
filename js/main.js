@@ -10,3 +10,9 @@ var chatHandler = new ChatHandler('http://35.157.80.184:8080/', function (messag
 });
 
 new MessageHandler(messageInput, submitButton, chatHandler, userHandler);
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+        navigator.serviceWorker.register('../sw_cached_site.js');
+    })
+}
