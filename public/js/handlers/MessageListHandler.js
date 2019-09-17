@@ -5,7 +5,6 @@ var MessageListHandler = function (messageListContainer, userHandler) {
 };
 
 MessageListHandler.prototype.addMessage = function (message) {
-    console.log(message)
     this.messages.push(message);
     this.render();
 };
@@ -13,8 +12,6 @@ MessageListHandler.prototype.addMessage = function (message) {
 MessageListHandler.prototype.render = function () {
     this.messageListContainer.innerHTML = '';
     for (var i = 0; i < this.messages.length; i++) {
-        var message = document.createElement('div');
-        message.className = 'message';
 
         var content = document.createElement('span');
         content.innerHTML = this.messages[i].message;
@@ -24,6 +21,8 @@ MessageListHandler.prototype.render = function () {
         user.className = 'message__user';
         user.innerHTML = this.messages[i].user;
 
+        var message = document.createElement('div');
+        message.className = this.getMessageClassName(this.messages[i].user);
         message.appendChild(user);
         message.appendChild(content);
 
@@ -31,3 +30,6 @@ MessageListHandler.prototype.render = function () {
     }
 };
 
+MessageListHandler.prototype.getMessageClassName = function (userName) {
+    return userName === this.userHandler.getUserName() ? 'message' : 'message message--partner'
+}
