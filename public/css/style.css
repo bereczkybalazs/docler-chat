@@ -1,0 +1,45 @@
+.app {
+    height: 100vh;
+}
+
+.app .messageList {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 100px 10px;
+}
+
+.app .messageList .message {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.app .messageList .message.message--partner {
+    justify-content: flex-start;
+}
+
+.app .messageList .message .message__user {
+    margin-right: 10px;
+}
+
+.app .messageList .message .message__user:after {
+    content: ":";
+}
+
+.app .toolbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+}
+
+.app .toolbar .toolbar__input {
+    padding: 10px;
+}
+
+.app .toolbar .userName {
+    width: 80px;
+}
