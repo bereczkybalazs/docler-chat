@@ -31,6 +31,7 @@ MessageListHandler.prototype.render = function () {
         message.appendChild(content);
 
         this.messageListContainer.appendChild(message);
+        this.messageListContainer.scrollTop = this.messageListContainer.scrollHeight;
     }
 };
 
