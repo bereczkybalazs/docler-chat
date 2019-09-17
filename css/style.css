@@ -39,8 +39,9 @@
 
 .app .toolbar .toolbar__input {
     padding: 10px;
+    width: 20%;
 }
 
-.app .toolbar .userName {
-    width: 80px;
+.app .toolbar .messageInput {
+    width: 40%;
 }
