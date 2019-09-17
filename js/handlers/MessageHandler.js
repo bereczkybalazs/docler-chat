@@ -20,8 +20,10 @@ var MessageHandler = function (input, submitButton, chatHandler, stateHandler) {
 };
 
 MessageHandler.prototype.submit = function () {
-    this.chatHandler.send(this.message, this.stateHandler.getState().user);
-    this.clearMessage();
+    if (this.message.length > 3) {
+        this.chatHandler.send(this.message, this.stateHandler.getState().user);
+        this.clearMessage();
+    }
 };
 
 MessageHandler.prototype.clearMessage = function () {
