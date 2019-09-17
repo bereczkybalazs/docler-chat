@@ -1,12 +1,6 @@
-var UserHandler = function (input) {
-    this.userName = 'Guest';
-    var that = this;
-    input.value = this.userName;
+var UserHandler = function (input, stateManager) {
+    input.value = stateManager.getState().user;
     input.addEventListener('keyup', function (e) {
-        that.userName = e.target.value;
+        stateManager.setState({...stateManager.getState(), user: e.target.value});
     })
-};
-
-UserHandler.prototype.getUserName = function () {
-    return this.userName;
 };

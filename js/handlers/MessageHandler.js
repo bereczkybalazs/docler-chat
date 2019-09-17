@@ -1,7 +1,7 @@
-var MessageHandler = function (input, submitButton, chatHandler, userHandler) {
+var MessageHandler = function (input, submitButton, chatHandler, stateHandler) {
     this.message = '';
     this.chatHandler = chatHandler;
-    this.userHandler = userHandler;
+    this.stateHandler = stateHandler;
     this.input = input;
 
     var that = this;
@@ -20,7 +20,7 @@ var MessageHandler = function (input, submitButton, chatHandler, userHandler) {
 };
 
 MessageHandler.prototype.submit = function () {
-    this.chatHandler.send(this.message, this.userHandler.getUserName());
+    this.chatHandler.send(this.message, this.stateHandler.getState().user);
     this.clearMessage();
 };
 

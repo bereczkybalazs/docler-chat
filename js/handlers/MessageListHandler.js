@@ -1,28 +1,32 @@
-var MessageListHandler = function (messageListContainer, userHandler) {
+var MessageListHandler = function (messageListContainer, stateManager) {
     this.messageListContainer = messageListContainer;
-    this.userHandler = userHandler;
-    this.messages = [];
+    this.stateManager = stateManager;
 };
 
 MessageListHandler.prototype.addMessage = function (message) {
-    this.messages.push(message);
+
+    this.stateManager.setState({
+        ...this.stateManager.getState(),
+        messages: this.stateManager.getState().messages.concat([message])
+    });
     this.render();
 };
 
 MessageListHandler.prototype.render = function () {
     this.messageListContainer.innerHTML = '';
-    for (var i = 0; i < this.messages.length; i++) {
+    var messages = this.stateManager.getState().messages;
+    for (var i = 0; i < messages.length; i++) {
 
         var content = document.createElement('span');
-        content.innerHTML = this.messages[i].message;
+        content.innerHTML = messages[i].message;
         content.className = 'message__content';
 
         var user = document.createElement('span');
         user.className = 'message__user';
-        user.innerHTML = this.messages[i].user;
+        user.innerHTML = messages[i].user;
 
         var message = document.createElement('div');
-        message.className = this.getMessageClassName(this.messages[i].user);
+        message.className = this.getMessageClassName(messages[i].user);
         message.appendChild(user);
         message.appendChild(content);
 
@@ -30,6 +34,6 @@ MessageListHandler.prototype.render = function () {
     }
 };
 
-MessageListHandler.prototype.getMessageClassName = function (userName) {
-    return userName === this.userHandler.getUserName() ? 'message' : 'message message--partner'
-}
+MessageListHandler.prototype.getMessageClassName = function (user) {
+    return user === this.stateManager.getState().user ? 'message' : 'message message--partner'
+};
