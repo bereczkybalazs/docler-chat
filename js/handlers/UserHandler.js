@@ -1,6 +1,21 @@
-var UserHandler = function (input, stateManager) {
+var UserHandler = function (input, messageListHandler, stateManager) {
     input.value = stateManager.getState().user;
     input.addEventListener('keyup', function (e) {
-        stateManager.setState({...stateManager.getState(), user: e.target.value});
+        var user = stateManager.getState().user;
+        var newUser = e.target.value;
+        if (newUser.length > 2) {
+            var messages = stateManager.getState().messages.map(function (message) {
+                if (message.user === user) {
+                    message.user = newUser;
+                }
+                return message;
+            });
+            stateManager.setState({
+                ...stateManager.getState(),
+                messages: messages,
+                user: newUser
+            });
+            messageListHandler.render();
+        }
     })
 };

@@ -9,7 +9,7 @@ var chatHandler = new ChatHandler('http://35.157.80.184:8080/', function (messag
     messageListHandler.addMessage(message);
 });
 
-new UserHandler(userNameInput, stateManager);
+new UserHandler(userNameInput, messageListHandler, stateManager);
 new MessageHandler(messageInput, submitButton, chatHandler, stateManager);
 
 if ('serviceWorker' in navigator) {
